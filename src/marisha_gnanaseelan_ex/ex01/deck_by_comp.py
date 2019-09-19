@@ -18,7 +18,7 @@ def deck_comp():
     """
     This function creates the same list as deck_loop() using a list comprehension
     """
-    return [(suit1, val1) for suit1 in SUITS for val1 in VALUES]  # list comprehension of the code above
+    return [(suit, val) for suit in SUITS for val in VALUES]  # list comprehension of the code above
 
 
 if __name__ == '__main__':
