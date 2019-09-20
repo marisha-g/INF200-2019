@@ -38,6 +38,7 @@ if __name__ == '__main__':
     answer = False  # start value for answer
     points = 3  # start value for points
     rand = rand_int()  # calling and defining the function, rand_int()
+
     while not answer and points > 0:  # checking if the game is not finished and you have more than 0 points left
         guess = your_guess()  # calling and defining the function, your_guess()
         answer = check_answer(rand, guess)  # calling and defining the function check_answer()
