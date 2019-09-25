@@ -9,6 +9,7 @@ def char_counts(textfilename):
     This function opens and reads a given file with utf-8 encoding.
     It also counts how often each character code (0–255) occurs in the string
     and return the result as a list or tuple.
+
     :return: list
     """
 

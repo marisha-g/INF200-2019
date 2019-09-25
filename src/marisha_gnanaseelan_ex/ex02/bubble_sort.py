@@ -6,15 +6,15 @@ __email__ = 'magn@nmbu.no'
 
 def bubble_sort(data):
     """
-    
+    A simple sorting algorithm that returns the input data in ascending order.
 
     :return: list
     """
     new_data = list(data)
-    x = len(new_data)
+    length_lst = len(new_data)
 
-    for i in range(x):
-        for k in range(x-i-1):
+    for i in range(length_lst):
+        for k in range(length_lst-i-1):
             if new_data[k + 1] < new_data[k]:
                 new_data[k + 1], new_data[k] = new_data[k], new_data[k + 1]
     return new_data
