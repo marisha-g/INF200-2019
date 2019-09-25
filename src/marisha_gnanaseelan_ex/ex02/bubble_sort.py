@@ -14,9 +14,9 @@ def bubble_sort(data):
     length_lst = len(new_data)
 
     for i in range(length_lst):
-        for k in range(length_lst-i-1):
-            if new_data[k + 1] < new_data[k]:
-                new_data[k + 1], new_data[k] = new_data[k], new_data[k + 1]
+        for j in range(length_lst-i-1):
+            if new_data[j + 1] < new_data[j]:
+                new_data[j + 1], new_data[j] = new_data[j], new_data[j + 1]
     return new_data
 
 
