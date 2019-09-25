@@ -5,6 +5,7 @@ from math import log2
 __author__ = 'Marisha Gnanaseelan'
 __email__ = 'magn@nmbu.no'
 
+
 def letter_freq(txt):
     """
     This program prints the number of times each letter, digit or symbol
@@ -26,10 +27,9 @@ def letter_freq(txt):
 
 def entropy(message):
     """
-    Returns the entropy calculated according to this equation:
-    H = - \sum_i p_i \log_2 p_i
+    Returns the entropy calculated according to the equation for entropy.
 
-    :return: float 
+    :return: float
     """
     message = letter_freq(message)
     n = sum(message.values())
