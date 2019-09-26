@@ -13,15 +13,15 @@ def letter_freq(txt):
 
     :return: dict
     """
-    frequencies = {}  # empty dictionary
-    txt_lower = txt.lower()  # all letters are made into lowercase letters
+    frequencies = {}
+    txt_lower = txt.lower()
 
     for i in txt_lower:
-        keys = frequencies.keys()  # list of all the keys in the dictionary
-        if i in keys:  # checks if the letter, digit or symbol is in the dictionary keys
-            frequencies[i] += 1  # if the if-statement is true then the value to the corresponding key is added by 1
+        keys = frequencies.keys()
+        if i in keys:
+            frequencies[i] += 1
         else:
-            frequencies[i] = 1  # if the if-statement is false then the value to the corresponding key is 1
+            frequencies[i] = 1
     return frequencies
 
 

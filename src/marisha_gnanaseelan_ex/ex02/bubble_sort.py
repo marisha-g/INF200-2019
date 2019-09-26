@@ -10,14 +10,14 @@ def bubble_sort(data):
 
     :return: list
     """
-    new_data = list(data)
-    length_lst = len(new_data)
+    lst_data = list(data)
+    length_lst = len(lst_data)
 
     for i in range(length_lst):
         for j in range(length_lst-i-1):
-            if new_data[j + 1] < new_data[j]:
-                new_data[j + 1], new_data[j] = new_data[j], new_data[j + 1]
-    return new_data
+            if lst_data[j + 1] < lst_data[j]:
+                lst_data[j + 1], lst_data[j] = lst_data[j], lst_data[j + 1]
+    return lst_data
 
 
 if __name__ == "__main__":
