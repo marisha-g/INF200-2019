@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import pytest
 
 __author__ = 'Marisha Gnanaseelan'
 __email__ = 'magn@nmbu.no'
@@ -38,6 +39,7 @@ def test_median_odd_numbers():
     list_odd_numbers = [2, 4, 6, 6, 2]
     assert median(list_odd_numbers) == 4
 
+
 def test_median_even_numbers():
     """
     Test that check that the correct median is returned for lists
@@ -45,6 +47,7 @@ def test_median_even_numbers():
     """
     list_even_numbers = [3, 4, 5, 6]
     assert median(list_even_numbers) == 4.5
+
 
 def test_median_various_orders():
     """
@@ -58,3 +61,12 @@ def test_median_various_orders():
     assert median(list_ordered) == 2.5
     assert median(list_reverse_ordered) == 2.5
     assert median(list_unordered) == 2.5
+
+
+def test_median_rasis_value_error_on_empty_list():
+    """
+    Test checking that requesting the median of an empty list
+    raises a ValueError exception.
+    """
+    with pytest.raises(ValueError):  # context manager
+        median([])
