@@ -28,3 +28,13 @@ def test_median_of_singleton():
     for a one-element list.
     """
     assert median([4]) == 4
+
+
+def test_median_odd_numbers():
+    """
+    Test that check that the correct median is returned for lists
+    with odd numbers of elements.
+    """
+    list_odd_numbers = [2, 4, 6, 6, 2]
+    assert median(list_odd_numbers) == 4
+
