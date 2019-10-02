@@ -45,3 +45,16 @@ def test_median_even_numbers():
     """
     list_even_numbers = [3, 4, 5, 6]
     assert median(list_even_numbers) == 4.5
+
+def test_median_various_orders():
+    """
+    Test that check that the correct median is returned for list with ordered,
+    reverse-ordered and unordered elements.
+    """
+    list_ordered = [1, 2, 3, 4]
+    list_reverse_ordered = [4, 3, 2, 1]
+    list_unordered = [2, 4, 3, 1]
+
+    assert median(list_ordered) == 2.5
+    assert median(list_reverse_ordered) == 2.5
+    assert median(list_unordered) == 2.5
