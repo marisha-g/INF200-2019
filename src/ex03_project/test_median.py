@@ -75,6 +75,7 @@ def test_median_rasis_value_error_on_empty_list():
     with pytest.raises(ValueError):  # context manager
         median([])
 
+
 def test_median_original_unchanged():
     """
     Test that ensures that the median function leaves
@@ -83,3 +84,13 @@ def test_median_original_unchanged():
     data = [2, 4, 5, 8]
     _ = median(data)
     assert data == [2, 4, 5, 8]
+
+
+def test_median_tuples():
+    """
+    A test that ensures that the median function works
+    for tuples as well as lists.
+    """
+    tuple_1 = (1, 2, 3)
+    median_tuple = median(tuple_1)
+    assert median_tuple == 2
