@@ -38,3 +38,10 @@ def test_median_odd_numbers():
     list_odd_numbers = [2, 4, 6, 6, 2]
     assert median(list_odd_numbers) == 4
 
+def test_median_even_numbers():
+    """
+    Test that check that the correct median is returned for lists
+    with even numbers of elements.
+    """
+    list_even_numbers = [3, 4, 5, 6]
+    assert median(list_even_numbers) == 4.5
