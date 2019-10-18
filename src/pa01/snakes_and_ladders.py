@@ -7,21 +7,22 @@ __author__ = 'Marisha Gnanaseelan', 'Peter Langdalen'
 __email__ = 'magn@nmbu.no', 'pelangda@nmbu.no'
 
 
-snakes_and_ladders = {1:40,
-                      8:10,
-                      36:52,
-                      43:62,
-                      49:79,
-                      65:82,
-                      68:85,
-                      24:5,
-                      33:3,
-                      42:30,
-                      56:37,
-                      64:27,
-                      74:12,
-                      87:70
+snakes_and_ladders = {1: 40,
+                      8: 10,
+                      36: 52,
+                      43: 62,
+                      49: 79,
+                      65: 82,
+                      68: 85,
+                      24: 5,
+                      33: 3,
+                      42: 30,
+                      56: 37,
+                      64: 27,
+                      74: 12,
+                      87: 70
                       }
+
 
 def single_game(num_players):
     """
@@ -97,13 +98,20 @@ def multi_game_experiment(num_games, num_players, seed):
     random.seed(seed)
     return multiple_games(num_games, num_players)
 
+
 if __name__ == '__main__':
     number_of_players = 4
     number_of_games = 100
-    random_seed = 0.5
+    random_seed = 20
 
-    number_of_moves = multi_game_experiment(number_of_players, number_of_games, random_seed)
+    number_of_moves = multi_game_experiment(number_of_players,
+                                            number_of_games, random_seed)
 
-    print(f' The shortest game duration is {(min(number_of_moves))} and the longest game duration is {(max(number_of_moves))}.')
+    print(f' The shortest game duration is {(min(number_of_moves))} and '
+          f'the longest game duration is {(max(number_of_moves))}.')
+
     print(f' The median game duration is {statistics.median(number_of_moves)}')
-    print(f' The mean game duration and its standard deviation is {statistics.mean(number_of_moves)} and {statistics.stdev(number_of_moves)}')
+
+    print(f' The mean game duration and its standard deviation is '
+          f'{statistics.mean(number_of_moves)} and '
+          f'{statistics.stdev(number_of_moves)}')
