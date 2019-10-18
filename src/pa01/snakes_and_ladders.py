@@ -104,7 +104,7 @@ def multi_game_experiment(num_games, num_players, seed):
 
 if __name__ == '__main__':
     number_of_players = 4
-    number_of_games = 10
+    number_of_games = 100
     random_seed = 1
 
     number_of_moves = multi_game_experiment(number_of_players,
@@ -115,6 +115,6 @@ if __name__ == '__main__':
 
     print(f' The median game duration is {statistics.median(number_of_moves)}')
 
-    print(f' The mean game duration and its standard deviation is '
-          f'{statistics.mean(number_of_moves)} and '
-          f'{statistics.stdev(number_of_moves)}')
+    print(f' The mean game duration is {statistics.mean(number_of_moves)} and '
+          f'the standard deviation is {statistics.stdev(number_of_moves)}')
+
