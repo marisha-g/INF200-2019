@@ -1,8 +1,27 @@
 # -*- coding: utf-8 -*-
 
+import random
+import statistics
+
 __author__ = 'Marisha Gnanaseelan', 'Peter Langdalen'
 __email__ = 'magn@nmbu.no', 'pelangda@nmbu.no'
 
+
+snakes_and_ladders = {1:40,
+                      8:10,
+                      36:52,
+                      43:62,
+                      49:79,
+                      65:82,
+                      68:85,
+                      24:5,
+                      33:3,
+                      42:30,
+                      56:37,
+                      64:27,
+                      74:12,
+                      87:70
+                      }
 
 def single_game(num_players):
     """
@@ -18,12 +37,19 @@ def single_game(num_players):
     num_moves : int
         Number of moves the winning player needed to reach the goal
     """
-    num_players = input(int('How many players? '))
-    position = 0
+    position = [0] * num_players
     num_moves = 0
 
-    if num_players < 1:
-        print('Has to be one or more.')
+    while max(position) < 90:
+        for player in range(len(position)):
+            roll = random.randint(1, 6)
+            position[player] += roll
+
+            if position[player] in snakes_and_ladders:
+                position[player] = snakes_and_ladders[position[player]]
+            num_moves += 1
+
+        return num_moves
 
 
 def multiple_games(num_games, num_players):
