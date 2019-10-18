@@ -104,7 +104,7 @@ def multi_game_experiment(num_games, num_players, seed):
 
 if __name__ == '__main__':
     number_of_players = 4
-    number_of_games = 10
+    number_of_games = 100
     random_seed = 1
 
     number_of_moves = multi_game_experiment(number_of_players,
