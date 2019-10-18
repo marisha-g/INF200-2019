@@ -68,6 +68,11 @@ def multiple_games(num_games, num_players):
     num_moves : list
         List with the numbedr of moves needed in each game.
     """
+    num_moves = [0] * num_games
+
+    for games in range(num_games):
+        num_moves[games] = single_game(num_players)
+    return num_moves
 
 
 def multi_game_experiment(num_games, num_players, seed):
