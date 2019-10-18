@@ -48,7 +48,7 @@ def single_game(num_players):
 
             if position[player] in snakes_and_ladders:
                 position[player] = snakes_and_ladders[position[player]]
-            num_moves += 1
+        num_moves += 1
 
     return num_moves
 
@@ -71,8 +71,8 @@ def multiple_games(num_games, num_players):
     """
     num_moves = [0] * num_games
 
-    for games in range(num_games):
-        num_moves[games] = single_game(num_players)
+    for game in range(num_games):
+        num_moves[game] = single_game(num_players)
 
     return num_moves
 
@@ -101,8 +101,8 @@ def multi_game_experiment(num_games, num_players, seed):
 
 if __name__ == '__main__':
     number_of_players = 4
-    number_of_games = 100
-    random_seed = 20
+    number_of_games = 10
+    random_seed = 1
 
     number_of_moves = multi_game_experiment(number_of_players,
                                             number_of_games, random_seed)
