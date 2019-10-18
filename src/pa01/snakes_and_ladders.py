@@ -28,6 +28,9 @@ def single_game(num_players):
     """
     Returns duration of single game.
 
+    Source:
+    https://jakevdp.github.io/blog/2017/12/18/simulating-chutes-and-ladders/
+
     Arguments
     ---------
     num_players : int
