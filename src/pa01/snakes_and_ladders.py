@@ -117,4 +117,3 @@ if __name__ == '__main__':
 
     print(f' The mean game duration is {statistics.mean(number_of_moves)} and '
           f'the standard deviation is {statistics.stdev(number_of_moves)}')
-
