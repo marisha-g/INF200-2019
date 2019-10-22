@@ -3,6 +3,7 @@
 __author__ = 'Marisha Gnanaseelan'
 __email__ = 'magn@nmbu.no'
 
+
 class LCGRand:
     """
     Implements a linear congruential generator (LCG),
@@ -16,14 +17,14 @@ class LCGRand:
         """
         :param seed: random number generator
         """
-        self.seed = seed
+        self._seed = seed
 
     def rand(self):
         """
         :return: next random number
         """
-        self.seed = (LCGRand.a * self.seed) % LCGRand.m
-        return self.seed
+        self._seed = (LCGRand.a * self._seed) % LCGRand.m
+        return self._seed
 
 
 class ListRand:
@@ -39,12 +40,25 @@ class ListRand:
         :param numbers: list of numbers
         """
         self.numbers = numbers
-
+        self.next = 0
 
     def rand(self):
         """
         :return: next random number
         """
+        if self.next >= len(self.numbers):
+            raise RuntimeError('Last number in the list has been delivered.')
+
+        next_random_number = self.numbers[self.next]
+        self.next += 1
+        return next_random_number
 
 
 if __name__ == "__main__":
+    lst = ListRand([23, 4, 65, 32, 12])
+    lcg = LCGRand(245)
+
+    print("Drawing random numbers")
+    print("ListRand", "LCGRand")
+    for i in range(5):
+        print(lst.rand(), lcg.rand())
