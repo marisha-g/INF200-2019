@@ -9,8 +9,8 @@ import pytest
 from myrand import LCGRand, ListRand
 from walker import Walker
 
-__author__ = 'Marisha Gnanaseelan'
-__email__ = 'magn@nmbu.no'
+__author__ = 'Han Ekkehard Plesser'
+__email__ = 'hans.ekkehard.plesser@nmbu.no'
 
 
 def test_lcg():

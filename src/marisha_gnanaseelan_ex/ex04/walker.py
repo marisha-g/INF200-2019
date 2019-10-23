@@ -41,19 +41,25 @@ class Walker:
         """
         return self.steps
 
-    def start_to_home(self):
-        """
-        :return: steps required to reach home from start
-        """
-        walker = Walker(start_pos, home)
 
-        while not walker.is_at_home():
-            walker.move()
+def start_to_home(start_pos, home):
+    walk_process = Walker(start_pos, home)
 
-        return walker.get_steps()
+    while not walk_process.is_at_home():
+        walk_process.move()
+
+    return walk_process.get_steps()
+
 
 if __name__ == '__main__':
     distances = [1, 2, 5, 10, 20, 50, 100]
     simulations = 5
+    seed = 1
+
+    random.seed(seed)
 
     for i in distances:
+        path = [start_to_home(0, i)
+                for j in range(simulations)
+                ]
+        print('Distance: {0} --> Path Lengths: {1}'.format(i, path))

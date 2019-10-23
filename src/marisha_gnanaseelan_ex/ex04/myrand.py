@@ -58,7 +58,6 @@ if __name__ == "__main__":
     lst = ListRand([23, 4, 65, 32, 12])
     lcg = LCGRand(245)
 
-    print("Drawing random numbers")
     print("ListRand", "LCGRand")
     for i in range(5):
         print(lst.rand(), lcg.rand())
