@@ -9,7 +9,7 @@ import pytest
 from myrand import LCGRand, ListRand
 from walker import Walker
 
-__author__ = 'Han Ekkehard Plesser'
+__author__ = 'Hans Ekkehard Plesser'
 __email__ = 'hans.ekkehard.plesser@nmbu.no'
 
 
