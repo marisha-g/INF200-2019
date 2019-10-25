@@ -20,8 +20,9 @@ class Walker:
         """
         :return: steps to the left(x-1) or right(x+1) with equal probability
         """
-        self.x += 2 * random.uniform(0, 1) - 1
+        self.x += 2 * random.randint(0, 1) - 1
         self.steps += 1
+        return self.steps
 
     def is_at_home(self):
         """
