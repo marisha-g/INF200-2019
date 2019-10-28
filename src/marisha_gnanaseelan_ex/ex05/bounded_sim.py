@@ -83,3 +83,9 @@ class BoundedSimulation:
             walk_process.move()
             num_steps += 1
         return num_steps
+
+
+if __name__ == '__main__':
+
+    for left_boundaries in [0, -10, -100, -1000, -1000]:
+
