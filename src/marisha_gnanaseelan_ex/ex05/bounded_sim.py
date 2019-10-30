@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from walker_sim import Walker, Simulation
+from walker_sim import Walker, Simulations
 import random
 
 __author__ = 'Marisha Gnanaseelan'
@@ -43,7 +43,7 @@ class BoundedWalker(Walker):
             self.x = self.right
 
 
-class BoundedSimulation:
+class BoundedSimulation(Simulations):
     def __init__(self, start, home, seed, left_limit, right_limit):
         """
         Initialise the simulation
@@ -88,4 +88,7 @@ class BoundedSimulation:
 if __name__ == '__main__':
 
     for left_boundaries in [0, -10, -100, -1000, -1000]:
-
+        num_of_steps = BoundedSimulation(0, 20, seed=1234,
+                                         left_limit=left_boundaries,
+                                         right_limit=20).run_simulation(20)
+        print(f'Left boundary: {left_boundaries} = {num_of_steps} steps.')

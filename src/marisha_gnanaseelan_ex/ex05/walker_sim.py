@@ -91,7 +91,8 @@ class Simulations:
         list[int]
             List with the number of steps per walk
         """
-        return[self.single_walk() for i in range(num_walks)]
+        return[self.single_walk() for _ in range(num_walks)]
+
 
 if __name__ == '__main__':
     print(Simulations(0, 10, 12345).run_simulation(20))

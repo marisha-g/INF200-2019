@@ -52,7 +52,6 @@ class LCGRand:
             yield self.rand()
 
 
-
 class RandIter:
     def __init__(self, random_number_generator, length):
         """
