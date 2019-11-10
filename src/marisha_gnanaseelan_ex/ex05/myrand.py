@@ -81,7 +81,8 @@ class RandIter:
             If iter is called twice on the same RandIter object.
         """
         if self.num_generated_numbers is not None:
-            raise RuntimeError
+            raise RuntimeError('The iterator was called twice on the same '
+                               'RandIter object. ')
 
         self.num_generated_numbers = 0
 

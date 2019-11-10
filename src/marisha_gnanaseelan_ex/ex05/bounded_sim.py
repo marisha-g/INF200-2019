@@ -82,7 +82,7 @@ class BoundedSimulation(Simulations):
         while not walk_process.is_at_home():
             walk_process.move()
             num_steps += 1
-        return num_steps
+        return walk_process.get_steps()
 
 
 if __name__ == '__main__':
