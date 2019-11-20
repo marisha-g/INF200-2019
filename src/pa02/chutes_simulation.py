@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import random
+
 __author__ = 'Marisha Gnanaseelan', 'Peter Langdalen'
 __email__ = 'magn@nmbu.no', 'pelangda@nmbu.no'
 
@@ -72,3 +74,29 @@ class Board:
             return - self.new_position
         else:
             return 0
+
+class Player:
+    def __init__(self, board):
+        self.board = board
+        self.num_moves = 0
+        self.player_position = 0
+        self.roll_dice = random.randrange(1, 7, 1)
+
+    def move(self):
+        self.player_position += self.roll_dice
+
+        event = self.board.position_adjustment(self.player_position)
+
+        self.player_position = self.player_position + event
+        self.num_moves += 1
+
+class ResilientPlayer(Player):
+    def __init__(self, board, extra_steps = 1):
+        super().__init__(board)
+        self.extra_steps = extra_steps
+
+    def move(self):
+        if self.player_position in Board.chutes.values():
+            self.player_position += self.extra_steps
+        self.player_position += self.roll_dice
+        return self.player_position
