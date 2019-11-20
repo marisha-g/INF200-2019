@@ -19,28 +19,54 @@ class TestBoard:
                             64: 27, 74: 12, 87: 70}
         assert b.goal == 90
 
-    def test_custom_board(self):
-        b = cs.Board
-
 
 class TestPlayer:
     """Tests for Player
     class"""
 
-    def test_player_has_moved(self):
+    def test_move_player(self):
         b = cs.Board()
+        p = cs.Player(b)
+        p.move()
 
+        assert p.player_position >= 1
+        assert p.player_position not in b.chutes and b.ladders
 
+        position1 = p.player_position
+        p.move()
+        assert p.player_position != position1
 
 
 class TestResilientPlayer:
     """Tests for Resilient
     Player class"""
+    def test_move_resilientplayer(self):
+        b = cs.Board()
+        p = cs.ResilientPlayer(b)
+        p.move()
+
+        assert p.player_position >= 1
+        assert p.player_position not in b.chutes and b.ladders
+
+        position1 = p.player_position
+        p.move()
+        assert p.player_position != position1
 
 
 class TestLazyPlayer:
     """Tests for Lazy
     Player class"""
+    def test_move_lazyplayer(self):
+        b = cs.Board()
+        p = cs.LazyPlayer(b)
+        p.move()
+
+        assert p.player_position >= 1
+        assert p.player_position not in b.chutes and b.ladders
+
+        position1 = p.player_position
+        p.move()
+        assert p.player_position != position1
 
 
 class TestSimulation:
