@@ -47,8 +47,9 @@ class Board:
     def goal_reached(self, position):
         """
         Returns true if it is passed a position at or beyond the goal
-        :param position:
-        :return:
+
+        :param: position
+        :return: bool
         """
 
         if position >= self.goal:
@@ -63,8 +64,9 @@ class Board:
         the player must move forward (in case of a ladder) or backward (chute),
         to get to the correct position. If the player is not at the start of a
         chute or ladder, the method returns 0.
-        :param position:
-        :return:
+
+        :param: position
+        :return: self.new_position or 0 
         """
         if position in self.ladders.keys():
             self.new_position = self.ladders[position] - position
@@ -76,6 +78,10 @@ class Board:
             return 0
 
 class Player:
+    """
+    The Player class and its subclasses manage information about player
+    position, including information on which board a player “lives”.
+    """
     def __init__(self, board):
         self.board = board
         self.num_moves = 0
@@ -83,6 +89,13 @@ class Player:
         self.roll_dice = random.randrange(1, 7, 1)
 
     def move(self):
+        """
+        The move() method moves the player by implementing a die cast,
+        the following move and, if necessary, a move up a ladder or down
+        a chute.
+
+        :return: nothing
+        """
         self.player_position += self.roll_dice
 
         event = self.board.position_adjustment(self.player_position)
@@ -91,22 +104,43 @@ class Player:
         self.num_moves += 1
 
 class ResilientPlayer(Player):
+    """
+    This is a subclass of Player with slightly different moving behavior for
+    when a player slips down a chute.
+    """
     def __init__(self, board, extra_steps = 1):
         super().__init__(board)
         self.extra_steps = extra_steps
 
     def move(self):
+        """
+        When a resilient player slips down a chute, he will take extra steps
+        in the next move, in addition to the roll of the dice.
+
+        :return: self.player_position
+        """
         if self.player_position in Board.chutes.values():
             self.player_position += self.extra_steps
         self.player_position += self.roll_dice
         return self.player_position
 
 class LazyPlayer(Player):
+    """
+    Another subclass of Player. After climbing a ladder, a lazy player drops
+    a given number of steps.
+    The number of dropped steps is an optional argument to the constructor,
+    default is 1.
+    """
     def __init__(self, board, dropped_steps = 1):
         super().__init__(board)
         self.drop_steps = dropped_steps
 
     def move(self):
+        """
+        A lazy player never moves backward after dropping steps.
+
+        :return: self.player_position
+        """
         start_position = self.player_position
 
         if self.player_position in Board.ladders.values():
