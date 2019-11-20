@@ -150,7 +150,7 @@ class LazyPlayer(Player):
 
     def __init__(self, board, dropped_steps=1):
         super().__init__(board)
-        self.drop_steps = dropped_steps
+        self.dropped_steps = dropped_steps
         self.event = False
 
     def move(self):
@@ -180,7 +180,7 @@ class Simulation:
         self.board = board
         self.randomize_players = randomize_players
         self.seed = seed
-        self.result = []
+        self.results = []
         self.num_moves = 0
 
     def single_game(self):
@@ -212,16 +212,26 @@ class Simulation:
 
         random.seed = self.seed
         for _ in range(num_games):
-            self.result.append(self.single_game())
+            self.results.append(self.single_game())
 
     def get_results(self):
-        return self.result
+        return self.results
 
     def winners_per_type(self):
-        pass
+        res_players = {"Player": 0, "ResilientPlayer": 0, "LazyPlayer": 0}
+
+        for _, winner in self.get_results():
+            res_players[winner] += 1
+
+        return res_players
 
     def durations_per_type(self):
-        pass
+        res_player = {"Player": [], "ResilientPlayer": [], "LazyPlayer": []}
+
+        for move, winner in self.get_results():
+            res_player[winner].append(move)
+
+        return res_player
 
     def players_per_type(self):
         pass
