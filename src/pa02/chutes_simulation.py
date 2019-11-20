@@ -34,7 +34,7 @@ class Board:
 
     goal = 90
 
-    def __init__(self, ladders = None, chutes = None, goal = None):
+    def __init__(self, ladders=None, chutes=None, goal=None):
         if ladders is None:
             self.ladders = Board.ladders
         if chutes is None:
@@ -72,16 +72,18 @@ class Board:
             self.new_position = self.ladders[position] - position
             return self.new_position
         elif position in self.chutes.keys():
-            self.new_position = position - self.ladders[position]
+            self.new_position = position - self.chutes[position]
             return - self.new_position
         else:
             return 0
+
 
 class Player:
     """
     The Player class and its subclasses manage information about player
     position, including information on which board a player “lives”.
     """
+
     def __init__(self, board):
         self.board = board
         self.num_moves = 0
@@ -102,12 +104,14 @@ class Player:
 
         self.player_position = self.player_position + event
 
+
 class ResilientPlayer(Player):
     """
     This is a subclass of Player with slightly different moving behavior for
     when a player slips down a chute.
     """
-    def __init__(self, board, extra_steps = 1):
+
+    def __init__(self, board, extra_steps=1):
         super().__init__(board)
         self.extra_steps = extra_steps
 
@@ -123,6 +127,7 @@ class ResilientPlayer(Player):
         self.player_position += self.roll_dice
         return self.player_position
 
+
 class LazyPlayer(Player):
     """
     Another subclass of Player. After climbing a ladder, a lazy player drops
@@ -130,7 +135,8 @@ class LazyPlayer(Player):
     The number of dropped steps is an optional argument to the constructor,
     default is 1.
     """
-    def __init__(self, board, dropped_steps = 1):
+
+    def __init__(self, board, dropped_steps=1):
         super().__init__(board)
         self.drop_steps = dropped_steps
 
@@ -148,8 +154,10 @@ class LazyPlayer(Player):
                 self.player_position = start_position
         return self.player_position
 
+
 class Simulation:
-    def __init__(self, player_field, board = Board(), seed=123,
+
+    def __init__(self, player_field, board=Board(), seed=123,
                  randomize_players=False):
         self.player_field = player_field
         self.board = board
@@ -157,32 +165,30 @@ class Simulation:
         self.seed = seed
         self.result = []
         self.num_moves = 0
+
     def single_game(self):
         """
         Runs a single game returning a tuple consisting of the number of moves
         made and the type of the winner.
         :return:
         """
+        num_moves = 0
         if self.randomize_players is True:
             random.shuffle(self.player_field)
 
-        for i, j in enumerate(self.player_field):
-            self.player_field[i] = j
-            return self.player_field
+        players = []
+        for p in self.player_field:
+            players.append(p(self.board))
 
         while True:
-            for player in self.player_field:
-                if player is Player:
-                    self.num_moves = self.Player.move(player)
-                elif player is ResilientPlayer:
-                    self.num_moves = self.ResilientPlayer.move(player)
-                else:
-                    self.num_moves = self.LazyPlayer.move(player)
-                print(self.num_moves)
+            num_moves += 1
+            for player in players:
+                player.move()
 
-a = Simulation([ResilientPlayer, LazyPlayer])
-print(a.single_game())
-"""
+                if self.board.goal_reached(player.player_position):
+                    return num_moves, type(player).__name__
+
+
     def run_simulation(self):
 
         for game in range(num_games):
@@ -201,4 +207,4 @@ print(a.single_game())
 
     def players_per_type(self):
         pass
-"""
+    
