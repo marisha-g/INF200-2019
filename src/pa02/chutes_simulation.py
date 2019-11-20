@@ -234,4 +234,8 @@ class Simulation:
         return res_player
 
     def players_per_type(self):
-        pass
+        type_player = {"Player": 0, "ResilientPlayer": 0, "LazyPlayer": 0}
+        for player in self.player_field:
+            type_player[player.__name__] += 1
+
+        return type_player
