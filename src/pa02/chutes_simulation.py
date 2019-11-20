@@ -100,3 +100,17 @@ class ResilientPlayer(Player):
             self.player_position += self.extra_steps
         self.player_position += self.roll_dice
         return self.player_position
+
+class LazyPlayer(Player):
+    def __init__(self, board, dropped_steps = 1):
+        super().__init__(board)
+        self.drop_steps = dropped_steps
+
+    def move(self):
+        start_position = self.player_position
+
+        if self.player_position in Board.ladders.values():
+            self.player_position -= self.dropped_steps
+            if self.player_position <= 0:
+                self.player_position = start_position
+        return self.player_position
