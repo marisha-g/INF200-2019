@@ -101,7 +101,6 @@ class Player:
         event = self.board.position_adjustment(self.player_position)
 
         self.player_position = self.player_position + event
-        self.num_moves += 1
 
 class ResilientPlayer(Player):
     """
@@ -150,32 +149,40 @@ class LazyPlayer(Player):
         return self.player_position
 
 class Simulation:
-    def __init__(self, player_field, board, seed=123, randomize_players=False):
+    def __init__(self, player_field, board = Board(), seed=123,
+                 randomize_players=False):
         self.player_field = player_field
-        self.board = Board()
+        self.board = board
         self.randomize_players = randomize_players
+        self.seed = seed
         self.result = []
-        random.seed(seed)
-
+        self.num_moves = 0
     def single_game(self):
         """
         Runs a single game returning a tuple consisting of the number of moves
         made and the type of the winner.
         :return:
         """
-        position = [0] * self.list_of_players
-        num_moves = 0
+        if self.randomize_players is True:
+            random.shuffle(self.player_field)
 
-        while max(position) < self.Board.goal:
-            for player in range(len(position)):
-                position[player] += self.Player.roll_dice
+        for i, j in enumerate(self.player_field):
+            self.player_field[i] = j
+            return self.player_field
 
-                if position[player] in snakes_and_ladders:
-                    position[player] = snakes_and_ladders[position[player]]
-            num_moves += 1
+        while True:
+            for player in self.player_field:
+                if player is Player:
+                    self.num_moves = self.Player.move(player)
+                elif player is ResilientPlayer:
+                    self.num_moves = self.ResilientPlayer.move(player)
+                else:
+                    self.num_moves = self.LazyPlayer.move(player)
+                print(self.num_moves)
 
-        return (num_moves, self.type_of_player)
-
+a = Simulation([ResilientPlayer, LazyPlayer])
+print(a.single_game())
+"""
     def run_simulation(self):
 
         for game in range(num_games):
@@ -186,7 +193,7 @@ class Simulation:
 
     def winners_per_type(self):
         for _ in self.type_of_player:
-            winners_per_type = {self.type_of_player: num_of_wins}
+            winners_per_type = {self.type_of_player: self.num_moves}
         return winners_per_type
 
     def durations_per_type(self):
@@ -194,8 +201,4 @@ class Simulation:
 
     def players_per_type(self):
         pass
-
-
-
-
-
+"""
