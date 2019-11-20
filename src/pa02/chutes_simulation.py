@@ -88,7 +88,11 @@ class Player:
         self.board = board
         self.num_moves = 0
         self.player_position = 0
-        self.roll_dice = random.randrange(1, 7, 1)
+        self.dice = 0
+
+    def roll_dice(self):
+        self.dice = random.randrange(1, 7, 1)
+        return self.dice
 
     def move(self):
         """
@@ -98,7 +102,7 @@ class Player:
 
         :return: nothing
         """
-        self.player_position += self.roll_dice
+        self.player_position += Player.roll_dice(self)
 
         event = self.board.position_adjustment(self.player_position)
 
@@ -114,6 +118,7 @@ class ResilientPlayer(Player):
     def __init__(self, board, extra_steps=1):
         super().__init__(board)
         self.extra_steps = extra_steps
+        self.event = False
 
     def move(self):
         """
@@ -122,10 +127,17 @@ class ResilientPlayer(Player):
 
         :return: self.player_position
         """
-        if self.player_position in Board.chutes.values():
+        self.player_position += self.roll_dice()
+
+        if self.event is True:
             self.player_position += self.extra_steps
-        self.player_position += self.roll_dice
-        return self.player_position
+            self.event = False
+
+        move = self.board.position_adjustment(self.player_position)
+        self.player_position += move
+
+        if move < 0:
+            self.event = True
 
 
 class LazyPlayer(Player):
@@ -139,6 +151,7 @@ class LazyPlayer(Player):
     def __init__(self, board, dropped_steps=1):
         super().__init__(board)
         self.drop_steps = dropped_steps
+        self.event = False
 
     def move(self):
         """
@@ -146,13 +159,17 @@ class LazyPlayer(Player):
 
         :return: self.player_position
         """
-        start_position = self.player_position
+        dice = self.roll_dice()
+        self.player_position += dice
+        if self.event:
+            if dice >= self.dropped_steps:
+                self.player_position -= self.dropped_steps
+            self.event = False
 
-        if self.player_position in Board.ladders.values():
-            self.player_position -= self.dropped_steps
-            if self.player_position <= 0:
-                self.player_position = start_position
-        return self.player_position
+        move = self.board.position_adjustment(self.player_position)
+        self.player_position += move
+        if move > 0:
+            self.event = True
 
 
 class Simulation:
@@ -188,23 +205,23 @@ class Simulation:
                 if self.board.goal_reached(player.player_position):
                     return num_moves, type(player).__name__
 
+    def run_simulation(self, num_games):
+        """runs a given number of games and stores
+           the results in the Simulation object.
+           It returns nothing."""
 
-    def run_simulation(self):
-
-        for game in range(num_games):
+        random.seed = self.seed
+        for _ in range(num_games):
             self.result.append(self.single_game())
 
     def get_results(self):
-        return self.result()
+        return self.result
 
     def winners_per_type(self):
-        for _ in self.type_of_player:
-            winners_per_type = {self.type_of_player: self.num_moves}
-        return winners_per_type
+        pass
 
     def durations_per_type(self):
         pass
 
     def players_per_type(self):
         pass
-    
