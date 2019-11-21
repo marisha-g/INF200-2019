@@ -19,6 +19,11 @@ class TestBoard:
                             64: 27, 74: 12, 87: 70}
         assert b.goal == 90
 
+    def test_goal_reached(self):
+        b = cs.Board()
+        goal = b.goal_reached(90)
+        assert goal is True
+
 
 class TestPlayer:
     """Tests for Player
