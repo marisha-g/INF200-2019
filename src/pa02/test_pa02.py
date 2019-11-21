@@ -94,4 +94,10 @@ class TestPa02Simulation:
         w = s.winners_per_type()
         assert w['Player'] == 6
 
-   
+    def test_durations_per_type(self):
+        s = cs.Simulation([cs.LazyPlayer, cs.Player])
+        s.run_simulation(10)
+        w = s.durations_per_type()
+        assert w['Player'] or w['LazyPlayer'] == int
+
+
