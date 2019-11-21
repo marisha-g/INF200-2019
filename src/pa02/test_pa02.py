@@ -100,4 +100,8 @@ class TestPa02Simulation:
         w = s.durations_per_type()
         assert w['Player'] or w['LazyPlayer'] == int
 
-
+    def test_players_per_type(self):
+        s = cs.Simulation([cs.Player, cs.LazyPlayer, cs.ResilientPlayer])
+        s.run_simulation(10)
+        w = s.durations_per_type()
+        assert type(w['Player']) == list
