@@ -29,8 +29,8 @@ class TestPlayer:
         p = cs.Player(b)
         p.move()
 
-        assert p.player_position >= 1
-        assert p.player_position not in b.chutes and b.ladders
+        assert p.player_position > 0
+        assert p.player_position not in b.chutes.keys() and b.ladders.keys()
 
         position1 = p.player_position
         p.move()
@@ -45,8 +45,8 @@ class TestResilientPlayer:
         p = cs.ResilientPlayer(b)
         p.move()
 
-        assert p.player_position >= 1
-        assert p.player_position not in b.chutes and b.ladders
+        assert p.player_position > 0
+        assert p.player_position not in b.chutes.keys() and b.ladders.keys()
 
         position1 = p.player_position
         p.move()
@@ -61,8 +61,8 @@ class TestLazyPlayer:
         p = cs.LazyPlayer(b)
         p.move()
 
-        assert p.player_position >= 1
-        assert p.player_position not in b.chutes and b.ladders
+        assert p.player_position > 0
+        assert p.player_position not in b.chutes.keys() and b.ladders.keys()
 
         position1 = p.player_position
         p.move()
@@ -72,3 +72,6 @@ class TestLazyPlayer:
 class TestSimulation:
     """Tests for
     Simulation class"""
+
+
+
