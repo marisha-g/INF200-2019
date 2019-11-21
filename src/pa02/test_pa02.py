@@ -82,6 +82,12 @@ class TestLazyPlayer:
 class TestSimulation:
     """Tests for
     Simulation class"""
+    def test_single_game(self):
+        s = cs.Simulation([cs.Player, cs.Player])
+        end = s.single_game()
+        assert type(end) == tuple
+
+    def
 
 
 
