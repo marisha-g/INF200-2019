@@ -24,6 +24,11 @@ class TestBoard:
         goal = b.goal_reached(90)
         assert goal is True
 
+    def test_position_adjusment(self):
+        b = cs.Board()
+        pos = b.position_adjustment(1)
+        assert pos == 39
+
 
 class TestPlayer:
     """Tests for Player
