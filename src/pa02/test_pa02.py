@@ -6,7 +6,7 @@ __email__ = 'magn@nmbu.no', 'pelangda@nmbu.no'
 import chutes_simulation as cs
 
 
-class TestBoard:
+class TestPa02Board:
     """Tests for Board
     class"""
 
@@ -30,7 +30,7 @@ class TestBoard:
         assert pos == 39
 
 
-class TestPlayer:
+class TestPa02Player:
     """Tests for Player
     class"""
 
@@ -47,9 +47,10 @@ class TestPlayer:
         assert p.player_position != position1
 
 
-class TestResilientPlayer:
+class TestPa02ResilientPlayer:
     """Tests for Resilient
     Player class"""
+
     def test_move_resilientplayer(self):
         b = cs.Board()
         p = cs.ResilientPlayer(b)
@@ -63,9 +64,10 @@ class TestResilientPlayer:
         assert p.player_position != position1
 
 
-class TestLazyPlayer:
+class TestPa02LazyPlayer:
     """Tests for Lazy
     Player class"""
+
     def test_move_lazyplayer(self):
         b = cs.Board()
         p = cs.LazyPlayer(b)
@@ -79,15 +81,17 @@ class TestLazyPlayer:
         assert p.player_position != position1
 
 
-class TestSimulation:
-    """Tests for
-    Simulation class"""
+class TestPa02Simulation:
+
     def test_single_game(self):
         s = cs.Simulation([cs.Player, cs.Player])
         end = s.single_game()
         assert type(end) == tuple
 
-    def
+    def test_winners_per_type(self):
+        s = cs.Simulation([cs.Player])
+        s.run_simulation(6)
+        w = s.winners_per_type()
+        assert w['Player'] == 6
 
-
-
+   
