@@ -160,12 +160,15 @@ class LazyPlayer(Player):
         :return: self.player_position
         """
         dice = self.roll_dice()
-        self.player_position += dice
+
         if self.event:
             if dice >= self.dropped_steps:
                 self.player_position -= self.dropped_steps
+            else:
+                dice = 0
             self.event = False
 
+        self.player_position += dice
         move = self.board.position_adjustment(self.player_position)
         self.player_position += move
         if move > 0:
