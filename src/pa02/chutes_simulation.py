@@ -213,7 +213,7 @@ class Simulation:
            the results in the Simulation object.
            It returns nothing."""
 
-        random.seed = self.seed
+        self.seed = random.seed
         for _ in range(num_games):
             self.results.append(self.single_game())
 
