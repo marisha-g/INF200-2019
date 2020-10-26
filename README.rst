@@ -1,7 +1,7 @@
 INF200 Exersices:
 =================
 
-Marisha Gnanaseelan
+Advanced programming techniques used in shorter programming assignments.
 -------------------
 
 This repository contains all the exersices written as part of the
